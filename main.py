@@ -7,17 +7,19 @@ from pyrogram.types import Message
 # --- CONFIGURATION ---
 API_ID = int(os.environ.get("API_ID", 27479878))
 API_HASH = os.environ.get("API_HASH", "05f8dc8265d4c5df6376dded1d71c0ff")
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "8899757045:AAE19C08QRGCQWfynDhqUmXUzz0CDFDNE5g")
+# UPDATED TOKEN
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "8899757045:AAH-kaKKDmIE2ZU166gazj2lVD-JK8SzhXw")
 BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", -1004337222126))
 PORT = int(os.environ.get("PORT", 8080))
 
-# Clean the URL to prevent double slashes in the final link
+# UPDATED URL
 RAW_FQDN = os.environ.get("FQDN", "unfair-brittaney-uhhy5-54057e20.koyeb.app/")
 FQDN = RAW_FQDN.strip("/") 
 
 # --- INITIALIZE TELEGRAM BOT ---
+# Using ":memory:" prevents SQLite lock errors on Koyeb container restarts
 app = Client(
-    "StreamBot",
+    ":memory:", 
     api_id=API_ID,
     api_hash=API_HASH,
     bot_token=BOT_TOKEN
@@ -113,4 +115,3 @@ async def start_services():
 
 if __name__ == "__main__":
     asyncio.run(start_services())
-    
