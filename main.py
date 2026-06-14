@@ -4,7 +4,7 @@ from aiohttp import web
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-# --- CONFIGURATION (Your values are hardcoded as defaults) ---
+# --- CONFIGURATION ---
 API_ID = int(os.environ.get("API_ID", 27479878))
 API_HASH = os.environ.get("API_HASH", "05f8dc8265d4c5df6376dded1d71c0ff")
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "8899757045:AAE19C08QRGCQWfynDhqUmXUzz0CDFDNE5g")
@@ -26,7 +26,7 @@ app = Client(
 # --- TELEGRAM BOT LOGIC ---
 @app.on_message(filters.private & (filters.document | filters.video | filters.audio))
 async def handle_files(client: Client, message: Message):
-    # Forward to your specific bin channel (-1004337222126)
+    # Forward to your specific bin channel
     forwarded_msg = await message.forward(BIN_CHANNEL)
     
     # Generate the link using your Koyeb URL
@@ -43,6 +43,10 @@ async def start_cmd(client, message):
     await message.reply_text("Send me a file to get a stream/download link!")
 
 # --- WEB SERVER LOGIC ---
+async def index(request):
+    """Health check route for Koyeb to verify the app is alive."""
+    return web.Response(text="Bot and Web Server are running successfully!")
+
 async def stream_file(request):
     try:
         msg_id = int(request.match_info['msg_id'])
@@ -92,7 +96,13 @@ async def start_services():
     print("Bot Started!")
 
     server = web.Application()
+    
+    # The health check route Koyeb needs to keep the bot alive
+    server.router.add_get('/', index) 
+    
+    # The main streaming route
     server.router.add_get('/stream/{msg_id}', stream_file)
+    
     runner = web.AppRunner(server)
     await runner.setup()
     site = web.TCPSite(runner, '0.0.0.0', PORT)
@@ -103,4 +113,4 @@ async def start_services():
 
 if __name__ == "__main__":
     asyncio.run(start_services())
-  
+    
