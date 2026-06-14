@@ -12,7 +12,7 @@ BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", -1004337222126))
 PORT = int(os.environ.get("PORT", 8080))
 
 # Clean the URL to prevent double slashes in the final link
-RAW_FQDN = os.environ.get("FQDN", "verbal-brett-uhhy5-3cde1e2d.koyeb.app/")
+RAW_FQDN = os.environ.get("FQDN", "dead-corilla-uhhy5-c8187c78.koyeb.app/")
 FQDN = RAW_FQDN.strip("/") 
 
 # --- INITIALIZE TELEGRAM BOT ---
