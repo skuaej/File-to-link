@@ -8,7 +8,7 @@ from pyrogram.types import Message
 API_ID = int(os.environ.get("API_ID", 27479878))
 API_HASH = os.environ.get("API_HASH", "05f8dc8265d4c5df6376dded1d71c0ff")
 # UPDATED TOKEN
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "8899757045:AAH-kaKKDmIE2ZU166gazj2lVD-JK8SzhXw")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "8899757045:AAGhOlgwVYjlOVjm8PsbQkZ8oWlf-blbAx4")
 BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", -1004337222126))
 PORT = int(os.environ.get("PORT", 8080))
 
